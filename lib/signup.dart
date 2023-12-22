@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_mad/profile.dart';
 
 class SignUpScreen extends StatelessWidget {
   @override
@@ -50,8 +51,8 @@ appBar: AppBar(
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 50),
-                      child: Image.network(
-                        "https://cdn.shopify.com/s/files/1/2839/0288/products/Instagram_1000x1000.png",
+                      child: Image.asset(
+                       "assets/images/logo.webp",
                         width: 150,
                         height: 150,
                       ),
@@ -128,7 +129,9 @@ appBar: AppBar(
                         bottom: 20,
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => profileScreen(),));
+                        },
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Text(
@@ -182,8 +185,8 @@ appBar: AppBar(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.network(
-                            "https://1000logos.net/wp-content/uploads/2021/10/logo-Meta.png",
+                          Image.asset(
+                             "assets/images/logo_meta.png",
                             width: 30,
                             height: 30,
                           ),

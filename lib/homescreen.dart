@@ -6,7 +6,21 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+           backgroundColor: Colors.transparent, // Making AppBar transparent
+        // flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //       begin: Alignment.centerLeft,
+        //       end: Alignment.centerRight,
+        //       colors: [
+        //         Color.fromRGBO(254, 249, 243, 1),
+        //         Color.fromRGBO(235, 243, 254, 1),
+        //         Color.fromRGBO(238, 251, 242, 1),
+        //       ],
+        //       stops: [0.0, 0.35, 1.0],
+        //     ),
+        //   ),
+        // ),
         title: Row(
           children: [
             Image.network(
@@ -33,132 +47,135 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: ListView.builder(
-        itemCount: 10, // Replace with actual post count
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 1,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                        
-                                  CircleAvatar(
-                                    radius: 20,
-                                    // Replace with user's profile image
-                                    backgroundImage:
-                                        AssetImage('assets/images/profile.png'),
+      body: Container(
+    
+        child: ListView.builder(
+          itemCount: 10, // Replace with actual post count
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 0.1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                          
+                                    CircleAvatar(
+                                      radius: 20,
+                                      // Replace with user's profile image
+                                      backgroundImage:
+                                          AssetImage('assets/images/profile.png'),
+                                    ),
+                                    SizedBox(width: 8.0),
+                                    Text(
+                                      'Mr Sherry', // Replace with user's username
+                                      style:
+                                          TextStyle(fontWeight: FontWeight.bold),
+                                    ),
+                           
+                            ],
+                          ),
+                          Icon(Icons.more_vert_outlined),
+                        ],
+                      ),
+                    ),
+                    // Replace with post image
+                    Image.asset('assets/images/post1.png',width: double.infinity),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                child: Row(children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      // Implement like functionality
+                                    },
+                                    icon: Icon(Icons.favorite_border),
                                   ),
-                                  SizedBox(width: 8.0),
+                                  IconButton(
+                                    onPressed: () {
+                                      // Implement comment functionality
+                                    },
+                                    icon: Icon(Icons.comment),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      // Implement share functionality
+                                    },
+                                    icon: Icon(Icons.send),
+                                  ),
+                                ]),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  // Implement save functionality
+                                },
+                                icon: Icon(Icons.bookmark_border),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 8.0),
+                          Text(
+                            '42 likes', // Replace with actual like count
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 4.0),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CircleAvatar(
+                                radius: 12,
+                                // Replace with comment user's profile image
+                                backgroundImage:
+                                    AssetImage('assets/images/profile.png'),
+                              ),
+                              SizedBox(width: 8.0),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
                                   Text(
-                                    'Mr Sherry', // Replace with user's username
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                    'CommentUsername', // Replace with comment user's username
+                                    style: TextStyle(fontWeight: FontWeight.bold),
                                   ),
-                         
-                          ],
-                        ),
-                        Icon(Icons.more_vert_outlined),
-                      ],
+                                  Text(
+                                    'This is a comment', // Replace with comment text
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 8.0),
+                          Text(
+                            'View all 10 comments', // Replace with comment count
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          SizedBox(height: 8.0),
+                          Text(
+                            'Posted on 21 Dec 2023', // Replace with post date
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  // Replace with post image
-                  Image.network('https://th.bing.com/th/id/R.fc367e27545c07a154da93167cdd4ccd?rik=U%2bJ2rUI3l7OdWA&pid=ImgRaw&r=0'),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              child: Row(children: [
-                                IconButton(
-                                  onPressed: () {
-                                    // Implement like functionality
-                                  },
-                                  icon: Icon(Icons.favorite_border),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    // Implement comment functionality
-                                  },
-                                  icon: Icon(Icons.comment),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    // Implement share functionality
-                                  },
-                                  icon: Icon(Icons.send),
-                                ),
-                              ]),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                // Implement save functionality
-                              },
-                              icon: Icon(Icons.bookmark_border),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          '42 likes', // Replace with actual like count
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 4.0),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              radius: 12,
-                              // Replace with comment user's profile image
-                              backgroundImage:
-                                  AssetImage('assets/images/profile.png'),
-                            ),
-                            SizedBox(width: 8.0),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'CommentUsername', // Replace with comment user's username
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  'This is a comment', // Replace with comment text
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          'View all 10 comments', // Replace with comment count
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          'Posted on 21 Dec 2023', // Replace with post date
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.blue,
@@ -179,10 +196,11 @@ class HomeScreen extends StatelessWidget {
             label: 'Upload',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
+            icon: Icon(Icons.video_collection),
+            label: 'Videos',
           ),
           BottomNavigationBarItem(
+          
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
