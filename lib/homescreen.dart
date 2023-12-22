@@ -1,6 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+  void signOut(){
+    FirebaseAuth.instance.signOut();
+  }
+  final user=FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +49,8 @@ class HomeScreen extends StatelessWidget {
               "https://th.bing.com/th/id/OIP.Kb8XWL899wpZKDS8LosySgHaHk?rs=1&pid=ImgDetMain",
               width: 20,
             ),
-          )
+          ),
+            IconButton(onPressed: signOut,icon: Icon(Icons.logout)),
         ],
       ),
       body: Container(
@@ -76,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                     SizedBox(width: 8.0),
                                     Text(
-                                      'Mr Sherry', // Replace with user's username
+                                      ''+user.email!, // Replace with user's username
                                       style:
                                           TextStyle(fontWeight: FontWeight.bold),
                                     ),

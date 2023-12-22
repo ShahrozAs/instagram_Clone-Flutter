@@ -1,12 +1,42 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_mad/homescreen.dart';
+// import 'package:instagram_mad/homescreen.dart';
 import 'package:instagram_mad/signup.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  //wrong Email
+  void WrongEmail() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(title: Text('Wrong Email'));
+      },
+    );
+  }
+
+  //wrong Password
+  void WrongPassword() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(title: Text('Wrong Password'));
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         // Adding gradient background to AppBar
         backgroundColor: Colors.transparent, // Making AppBar transparent
         flexibleSpace: Container(
@@ -64,8 +94,9 @@ class LoginScreen extends StatelessWidget {
                         right: 20,
                         bottom: 20,
                       ),
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextField(
+                        controller: emailController,
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
@@ -80,8 +111,10 @@ class LoginScreen extends StatelessWidget {
                         right: 20,
                         bottom: 10,
                       ),
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextField(
+                        obscureText: true,
+                        controller: passwordController,
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
@@ -97,8 +130,35 @@ class LoginScreen extends StatelessWidget {
                         bottom: 20,
                       ),
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen(),));
+                        onPressed: () async {
+                          //Show loading circle
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              });
+
+                          try {
+                            await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                            Navigator.pop(context);
+                          } on FirebaseAuthException catch (e) {
+                            //pop Loading
+                            Navigator.pop(context);
+                            if (e.code == 'user-not-found') {
+                              WrongEmail();
+                            } else if (e.code == 'wrong-password') {
+                              WrongPassword();
+                            }
+                          }
+
+                          // await FirebaseAuth.instance
+                          //     .signInWithEmailAndPassword(
+                          //         email: emailController.text,
+                          //         password: passwordController.text);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
@@ -167,8 +227,8 @@ class LoginScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                           Image.asset(
-                             "assets/images/logo_meta.png",
+                          Image.asset(
+                            "assets/images/logo_meta.png",
                             width: 30,
                             height: 30,
                           ),

@@ -184,15 +184,18 @@ class _profileScreenState extends State<profileScreen> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 30.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Icon(Icons.grid_on_outlined),
-                Image.asset(
-                  'assets/images/person_square.png',
-                  width: 20,
-                )
-              ],
+            child: InkWell(
+              onTap: (){},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                    IconButton(onPressed: (){}, icon:   Icon(Icons.grid_on_outlined)),
+                  Image.asset(
+                    'assets/images/person_square.png',
+                    width: 20,
+                  )
+                ],
+              ),
             ),
           )
         ]),
@@ -200,3 +203,4 @@ class _profileScreenState extends State<profileScreen> {
     );
   }
 }
+
